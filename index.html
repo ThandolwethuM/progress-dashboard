@@ -1,0 +1,94 @@
+<!-- <!DOCTYPE html>	
+<html>	
+
+    <head>	
+        <title>progress-dashboard</title>	
+        <link rel="stylesheet" href="main.css">
+    </head>	
+
+    <body>
+        <h1>Progress Dashboard</h1>
+
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>progress-dashboard</title>
+        <link rel="stylesheet" href="main.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    </head>
+    <body>
+        <h1>Progress Dashboard</h1>
+        <h2>Welcome, Thandolwethu!</h2>
+
+        <div class="dropdown">
+            <button onclick="toggleDropdown()" class="dropbtn">Semesters</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Year1 Semester1</a>
+                <a href="#">Year1 Semester2</a>
+                <a href="#">Year2 Semester1</a>
+                <a href="#">Year2 Semester2</a>
+            </div>
+        </div>
+
+        <script>
+            function toggleDropdown() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    for (var i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <!-- This shart should specify class average, and where the student stands
+         double bar graph -->
+         <canvas id="myBarChart"></canvas>
+
+         <script>
+           const ctx = document.getElementById('myBarChart').getContext('2d');
+           new Chart(ctx, {
+             type: 'bar',
+             data: {
+               labels: ['Year1 Semester1', 'Year1 Semester2', 'Year2 Semester1', 'Year2 Semester2'],
+               datasets: [
+                 {
+                   label: 'Class Average',
+                   data: [78, 85, 90, 91],
+                   backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red bars
+                 },
+                 {
+                   label: 'Student Performance',
+                   data: [90, 85, 95, 92], 
+                   backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue bars
+                 }
+               ]
+             },
+             options: {
+               scales: {
+                 x: { stacked: false },
+                 y: { beginAtZero: true }
+               }
+             }
+           });
+         </script>
+
+         <!-- Add the top performing students bar or tab on the side -->
+                 
+
+    </body>
+</html>
