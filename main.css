@@ -39,3 +39,26 @@ h1 {
 .show {
     display: block;
 }
+
+#gauge-container {
+    width: 300px;
+    height: 150px;
+    border-radius: 300px 300px 0 0;
+    overflow: hidden;
+    position: relative;
+    background: #f0f0f0;
+    border: 5px solid #333;
+  }
+  
+  .needle {
+    width: 2px;
+    height: 140px;
+    background: red;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform-origin: bottom;
+    transform: rotate(0deg);
+    transition: transform 0.5s ease-in-out;
+  }
+  
