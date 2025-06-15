@@ -1,88 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>progress-dashboard</title>
-        <link rel="stylesheet" href="main.css">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    </head>
-    <body>
-        <h1>Progress Dashboard</h1>
-        <h2>Welcome, Thandolwethu!</h2>
-
-        <!-- Overall class average display -->
-        <div class="card">
-          <h2>Current Class Average</h2>
-          <div id="gauge-container"></div>
-        </div>
-
-        <br>
-
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Semesters</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="#">Year1 Semester1</a>
-                <a href="#">Year1 Semester2</a>
-                <a href="#">Year2 Semester1</a>
-                <a href="#">Year2 Semester2</a>
-            </div>
-        </div>
-
-        <script>
-            function toggleDropdown() {
-                document.getElementById("myDropdown").classList.toggle("show");
-            }
-
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-                if (!event.target.matches('.dropbtn')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-content");
-                    for (var i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-                }
-            }
-        </script>z
-
-        <!-- This shart should specify class average, and where the student stands
-         double bar graph -->
-         <canvas id="myBarChart"></canvas>
-
-         <script>
-           const ctx = document.getElementById('myBarChart').getContext('2d');
-           new Chart(ctx, {
-             type: 'bar',
-             data: {
-               labels: ['Year1 Semester1', 'Year1 Semester2', 'Year2 Semester1', 'Year2 Semester2'],
-               datasets: [
-                 {
-                   label: 'Class Average',
-                   data: [78, 85, 90, 91],
-                   backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red bars
-                 },
-                 {
-                   label: 'Student Performance',
-                   data: [90, 85, 95, 92], 
-                   backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue bars
-                 }
-               ]
-             },
-             options: {
-               scales: {
-                 x: { stacked: false },
-                 y: { beginAtZero: true }
-               }
-             }
-           });
-         </script>
-
-         <!-- Add the top performing students bar or tab on the side -->
-                 
-
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Student Progress Report</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="report-container">
+    <h1>Progress Report</h1>
+    <div class="student-info">
+      <p><strong>Name:</strong> Jane Doe</p>
+      <p><strong>Class:</strong> 10A</p>
+      <p><strong>Student ID:</strong> 123456</p>
+    </div>
+    <h2>Subjects & Scores</h2>
+    <table>
+      <tr>
+        <th>Subject</th>
+        <th>Score</th>
+        <th>Grade</th>
+      </tr>
+      <tr>
+        <td>Mathematics</td>
+        <td>92</td>
+        <td>A</td>
+      </tr>
+      <tr>
+        <td>English</td>
+        <td>85</td>
+        <td>B</td>
+      </tr>
+      <tr>
+        <td>Science</td>
+        <td>88</td>
+        <td>A</td>
+      </tr>
+      <tr>
+        <td>History</td>
+        <td>79</td>
+        <td>C</td>
+      </tr>
+      <tr>
+        <td>Art</td>
+        <td>95</td>
+        <td>A</td>
+      </tr>
+    </table>
+    <h2>Performance Overview</h2>
+    <div class="bar-chart">
+      <div class="bar" style="height: 92%"><span>Math</span></div>
+      <div class="bar" style="height: 85%"><span>Eng</span></div>
+      <div class="bar" style="height: 88%"><span>Sci</span></div>
+      <div class="bar" style="height: 79%"><span>Hist</span></div>
+      <div class="bar" style="height: 95%"><span>Art</span></div>
+    </div>
+    <div class="remarks">
+      <h3>Remarks</h3>
+      <p>Jane has shown excellent progress this term, especially in Art and Mathematics. Keep up the good work!</p>
+    </div>
+  </div>
+</body>
 </html>

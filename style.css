@@ -1,0 +1,78 @@
+body {
+  background: #f4f6f8;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.report-container {
+  background: #fff;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+h1, h2, h3 {
+  color: #2d3a4b;
+  margin-bottom: 1rem;
+}
+
+.student-info p {
+  margin: 0.2rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 0.7rem 1rem;
+  text-align: left;
+}
+
+th {
+  background: #f0f4f8;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2rem;
+  height: 180px;
+  margin-bottom: 2rem;
+  padding: 1rem 0 0 0;
+}
+
+.bar {
+  width: 50px;
+  background: linear-gradient(180deg, #81d4fa 0%, #0288d1 100%);
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.bar span {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+.remarks {
+  background: #f9fbe7;
+  border-left: 5px solid #cddc39;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+}
