@@ -21,7 +21,7 @@ student-progress-dashboard
 
 1. Clone the repository:
    ```
-   git clone <repository-url>
+   git clone git@github.com:ThandolwethuM/progress-dashboard.git
    cd student-progress-dashboard
    ```
 
