@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
+import streamlit as st
+
 # Load student data
 students_df = pd.read_csv('src/data/students.csv')
 marks_df = pd.read_csv('src/data/marks.csv')
@@ -10,17 +12,47 @@ marks_df = pd.read_csv('src/data/marks.csv')
 # Merge dataframes on student ID
 merged_df = pd.merge(students_df, marks_df, on='student_id')
 
+# Simple hardcoded credentials
+# USER_CREDENTIALS = {
+#     # student name : student name+id
+#     "student1": "password1",
+#     "student2": "password2"
+# }
+
+USER_CREDENTIALS = {
+    # student name : student id
+    # username : password
+    row['name']: f"{row['student_id']}"
+    for _, row in students_df.iterrows()
+}
+
+def login():
+    st.title("Student Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+            st.session_state["logged_in"] = True
+            st.session_state["username"] = username
+            st.success("Login successful!")
+        else:
+            st.error("Invalid username or password")
+
+if "logged_in" not in st.session_state or not st.session_state["logged_in"]:
+    login()
+    st.stop()
+
+# Display the merged dataframe
+# st.header("Merged Data")
+# st.dataframe(merged_df)
+
 # Calculate average marks for each student
 average_marks = (
-    merged_df
-    .groupby(['student_id', 'name'], as_index=False)
-    .mean(numeric_only=True)
-)
+    merged_df.groupby(['student_id', 'name'], as_index=False).mean(numeric_only=True)
+    )
 
 # Streamlit app layout
 st.title("Student Progress Dashboard")
-
-# Guage chart for overall average
 
 # average = merged_df['marks'].mean()
 average = 48 # Example average, replace with actual calculation
