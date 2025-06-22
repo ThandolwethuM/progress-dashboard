@@ -26,8 +26,6 @@ st.title("Student Progress Dashboard")
 average = 48 # Example average, replace with actual calculation
 
 
-
-
 # Create a gradient of colors from red to yellow to green
 def get_gradient_steps(start, end, n_steps):
     gradient = []
@@ -47,7 +45,7 @@ def get_gradient_steps(start, end, n_steps):
         gradient.append({'range': [start + i*(end-start)/n_steps, start + (i+1)*(end-start)/n_steps], 'color': color})
     return gradient
 
-steps = get_gradient_steps(0, 100, 100)  # More steps for smoother gradient
+steps = get_gradient_steps(0, 100, 200) 
 
 fig = go.Figure(go.Indicator(
     mode="gauge",
@@ -68,8 +66,8 @@ fig = go.Figure(go.Indicator(
 
 # Calculate the angle for the hand (in radians)
 angle = (average / 100) * np.pi  # 0 to pi (180 degrees)
-center_x, center_y = 0.5, 0.5
-radius = 0.4
+center_x, center_y = 0.5, 0.05  # Center of the gauge in normalized coordinates
+radius = 0.9  # Radius of the gauge hand
 
 # Calculate end point of the hand
 end_x = center_x + radius * np.cos(np.pi - angle)
@@ -80,7 +78,7 @@ fig.add_shape(
     type="line",
     x0=center_x, y0=center_y,
     x1=end_x, y1=end_y,
-    line=dict(color="black", width=6),
+    line=dict(color="black", width=5),
     xref="paper", yref="paper"
 )
 
