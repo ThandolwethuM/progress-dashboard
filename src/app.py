@@ -43,8 +43,8 @@ if "logged_in" not in st.session_state or not st.session_state["logged_in"]:
     st.stop()
 
 # Display the merged dataframe
-# st.header("Merged Data")
-# st.dataframe(merged_df)
+st.header("Merged Data")
+st.dataframe(merged_df)
 
 # Calculate average marks for each student
 average_marks = (
@@ -53,6 +53,9 @@ average_marks = (
 
 # Streamlit app layout
 st.title("Student Progress Dashboard")
+
+# Display the welcome message
+st.subheader(f"Welcome, {st.session_state['username']}!")
 
 # average = merged_df['marks'].mean()
 average = 48 # Example average, replace with actual calculation
@@ -137,17 +140,43 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# Get the logged-in student's name
+student_name = st.session_state["username"]
 
-# Display student information
-st.header("Student Information")
-st.dataframe(students_df)
+# Filter merged_df for the logged-in student
+student_data = merged_df[merged_df['name'] == student_name]
 
-# Display marks information
-st.header("Marks Information")
-st.dataframe(marks_df)
-
-# Display average marks
-st.header("Average Marks")
-st.dataframe(average_marks)
-
-# Optionally, add visualizations or additional features here
+if not student_data.empty:
+    # st.subheader("Your Marks by Subject")
+    st.markdown("<h2 style='text-align: center;'>Your Marks by Subject</h2>", unsafe_allow_html=True)
+    
+    # Assign colors based on marks
+    def get_color(mark):
+        if mark < 50:
+            return "red"
+        elif mark < 70:
+            return "yellow"
+        else:
+            return "green"
+    
+    colors = [get_color(m) for m in student_data['marks_obtained']]
+    
+    fig_bar = go.Figure(
+        data=[
+            go.Bar(
+                x=student_data['subject'], 
+                y=student_data['marks_obtained'],
+                marker_color=colors
+            )
+        ]
+    )
+    fig_bar.update_layout(
+        xaxis_title="Subject",
+        yaxis_title="Marks Obtained",
+        yaxis=dict(range=[0, 100]),
+        margin=dict(l=40, r=40, t=40, b=40),
+        height=400
+    )
+    st.plotly_chart(fig_bar, use_container_width=True)
+else:
+    st.warning("No marks found for your account.")
